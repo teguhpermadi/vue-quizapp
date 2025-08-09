@@ -5,6 +5,7 @@ import LoginPage from '../components/LoginPage.vue';
 import DashboardPage from '../components/DashboardPage.vue';
 import RegisterPage from '../components/RegisterPage.vue';
 import TeacherIndexPage from '../components/TeacherIndexPage.vue';
+import TeacherCreatePage from '../components/TeacherCreatePage.vue';
 
 const routes = [
   {
@@ -17,22 +18,24 @@ const routes = [
     // Bisa tambahkan meta: { requiresAuth: true }
   },
   {
-    path: '/login',
+    path: '/auth',
     component: UnauthenticatedLayout,
     children: [
-      { path: '', component: LoginPage },
+      { path: 'login', component: LoginPage },
+      { path: 'register', component: RegisterPage }
     ]
   },
-  { path: '/register', component: UnauthenticatedLayout, 
-    children: [
-      { path: '', component: RegisterPage }
-    ] 
-  },
+  // { path: '/register', component: UnauthenticatedLayout, 
+  //   children: [
+  //     { path: 'register', component: RegisterPage }
+  //   ] 
+  // },
   {
     path: '/teachers',
     component: AuthenticatedLayout,
     children: [
       { path: '', component: TeacherIndexPage },
+      { path: 'create', component: TeacherCreatePage },
     ]
   }
 ];

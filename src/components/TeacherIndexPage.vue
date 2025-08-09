@@ -1,6 +1,7 @@
 <template>
   <div>
     <h2>Daftar Guru</h2>
+    <router-link to="/teachers/create">Tambah Guru</router-link>
     <table>
       <thead>
         <tr>
@@ -8,8 +9,6 @@
           <th>Nama</th>
           <th>Gender</th>
           <th>Jumlah Mapel</th>
-          <th>Created At</th>
-          <th>Updated At</th>
         </tr>
       </thead>
       <tbody>
@@ -18,8 +17,6 @@
           <td>{{ teacher.name }}</td>
           <td>{{ teacher.gender }}</td>
           <td>{{ teacher.subject_count }}</td>
-          <td>{{ teacher.created_at }}</td>
-          <td>{{ teacher.updated_at }}</td>
         </tr>
       </tbody>
     </table>
