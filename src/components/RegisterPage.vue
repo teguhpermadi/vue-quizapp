@@ -20,6 +20,9 @@
       </div>
       <button type="submit" :disabled="loading">Register</button>
     </form>
+    <div>
+      <router-link to="/login">Already have an account? Login here</router-link>
+    </div>
     <div v-if="error" class="error">{{ error }}</div>
     <div v-if="success" class="success">{{ success }}</div>
     <div v-if="loading" class="loading">Loading...</div>
@@ -65,73 +68,4 @@ const handleRegister = async () => {
 </script>
 
 <style scoped>
-.register-container {
-  max-width: 400px;
-  margin: 60px auto;
-  padding: 32px 24px;
-  border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(66, 185, 131, 0.12);
-  background: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.register-container h2 {
-  margin-bottom: 24px;
-  color: #42b983;
-  font-weight: 700;
-  font-size: 2rem;
-}
-.register-container form {
-  width: 100%;
-}
-.register-container label {
-  display: block;
-  margin-bottom: 6px;
-  color: #333;
-  font-weight: 500;
-}
-.register-container input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 18px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 1rem;
-  transition: border-color 0.2s;
-}
-.register-container input:focus {
-  border-color: #42b983;
-  outline: none;
-}
-.register-container button[type="submit"] {
-  width: 100%;
-  padding: 12px;
-  background: #42b983;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.register-container button[type="submit"]:hover {
-  background: #36996b;
-}
-.error {
-  color: #d32f2f;
-  margin-top: 16px;
-  text-align: center;
-}
-.success {
-  color: #388e3c;
-  margin-top: 16px;
-  text-align: center;
-}
-.loading {
-  margin-top: 16px;
-  color: #42b983;
-  text-align: center;
-}
 </style>

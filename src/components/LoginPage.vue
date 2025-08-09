@@ -12,6 +12,9 @@
       </div>
       <button type="submit" :disabled="loading">Login</button>
     </form>
+        <div>
+            <router-link to="/register">Don't have an account? Register here</router-link>
+        </div>
     <div v-if="error" class="error">{{ error }}</div>
     <div v-if="success" class="success">{{ success }}</div>
     <div v-if="loading" class="loading">Loading...</div>

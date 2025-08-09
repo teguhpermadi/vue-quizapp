@@ -31,19 +31,4 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.dashboard-container {
-  max-width: 500px;
-  margin: 40px auto;
-  padding: 24px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background: #fff;
-}
-.dashboard-container h2 {
-  text-align: center;
-  margin-bottom: 24px;
-}
-.dashboard-container p {
-  margin: 8px 0;
-}
 </style>
