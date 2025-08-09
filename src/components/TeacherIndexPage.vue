@@ -14,7 +14,6 @@
     <table>
       <thead>
         <tr>
-          <th>ID</th>
           <th>Nama</th>
           <th>Gender</th>
           <th>Jumlah Mapel</th>
@@ -23,7 +22,6 @@
       </thead>
       <tbody>
         <tr v-for="teacher in teachers" :key="teacher.id">
-          <td>{{ teacher.id }}</td>
           <td>{{ teacher.name }}</td>
           <td>{{ teacher.gender }}</td>
           <td>{{ teacher.subject_count }}</td>
