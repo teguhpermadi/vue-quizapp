@@ -14,14 +14,14 @@
     </form>
     <div v-if="error" class="error">{{ error }}</div>
     <div v-if="success" class="success">{{ success }}</div>
-    <button @click="handleLogout" :disabled="loading">Logout</button>
     <div v-if="loading" class="loading">Loading...</div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { login, LoginResponse, logout } from '../services/authService';
+import { useRouter } from 'vue-router';
+import { login, LoginResponse } from '../services/authService';
 
 const email = ref('');
 const password = ref('');
@@ -29,6 +29,7 @@ const deviceName = ref(navigator.userAgent);
 const loading = ref(false);
 const error = ref('');
 const success = ref('');
+const router = useRouter();
 
 const handleLogin = async () => {
   error.value = '';
@@ -41,31 +42,11 @@ const handleLogin = async () => {
       device_name: deviceName.value,
     });
     success.value = response.message;
-    localStorage.setItem('token', response.token);
-    localStorage.setItem('user', JSON.stringify(response.user));
+  localStorage.setItem('token', response.token);
+  localStorage.setItem('user', JSON.stringify(response.user));
+  router.push('/');
   } catch (err) {
     error.value = err.response?.data?.message || 'Login gagal';
-  } finally {
-    loading.value = false;
-  }
-};
-
-const handleLogout = async () => {
-  error.value = '';
-  success.value = '';
-  loading.value = true;
-  try {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      error.value = 'Token tidak ditemukan.';
-      return;
-    }
-    await logout(token);
-    success.value = 'Logout berhasil';
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-  } catch (err) {
-    error.value = err.response?.data?.message || 'Logout gagal';
   } finally {
     loading.value = false;
   }
