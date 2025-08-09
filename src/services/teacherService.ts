@@ -108,8 +108,8 @@ export interface DeleteTeacherResponse {
   message: string;
 }
 
-export async function getTeachers(token: string): Promise<TeachersResponse> {
-  const response = await axios.get(`${API_BASE_URL}/teachers`, {
+export async function getTeachers(token: string, page: number = 1): Promise<TeachersResponse> {
+  const response = await axios.get(`${API_BASE_URL}/teachers?page=${page}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
