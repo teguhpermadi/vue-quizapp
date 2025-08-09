@@ -30,3 +30,15 @@ export async function login(payload: LoginPayload): Promise<LoginResponse> {
   const response = await axios.post(`${API_BASE_URL}/login`, payload);
   return response.data;
 }
+
+export async function logout(token: string): Promise<void> {
+  await axios.post(
+    `${API_BASE_URL}/logout`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+}
