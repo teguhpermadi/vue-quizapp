@@ -18,10 +18,11 @@
           <td>{{ teacher.name }}</td>
           <td>{{ teacher.gender }}</td>
           <td>{{ teacher.subject_count }}</td>
-            <td>
-                <router-link :to="`/teachers/${teacher.id}`">Detail</router-link>
-                <router-link :to="`/teachers/${teacher.id}/edit`">Edit</router-link>
-            </td>
+      <td>
+        <router-link :to="`/teachers/${teacher.id}`">Detail</router-link>
+        <router-link :to="`/teachers/${teacher.id}/edit`">Edit</router-link>
+        <button @click="handleDelete(teacher.id)">Delete</button>
+      </td>
         </tr>
       </tbody>
     </table>
@@ -32,13 +33,13 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { getTeachers, Teacher } from '../services/teacherService';
+import { getTeachers, Teacher, deleteTeacher } from '../services/teacherService';
 
 const teachers = ref<Teacher[]>([]);
 const loading = ref(false);
 const error = ref('');
 
-onMounted(async () => {
+const loadTeachers = async () => {
   loading.value = true;
   error.value = '';
   try {
@@ -54,5 +55,26 @@ onMounted(async () => {
   } finally {
     loading.value = false;
   }
-});
+};
+
+const handleDelete = async (id: string) => {
+  if (!confirm('Yakin ingin menghapus guru ini?')) return;
+  loading.value = true;
+  error.value = '';
+  try {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      error.value = 'Token tidak ditemukan.';
+      return;
+    }
+    await deleteTeacher(id, token);
+    await loadTeachers();
+  } catch (err) {
+    error.value = 'Gagal menghapus guru.';
+  } finally {
+    loading.value = false;
+  }
+};
+
+onMounted(loadTeachers);
 </script>

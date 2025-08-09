@@ -51,7 +51,6 @@ onMounted(async () => {
     }
     const teacherId = route.params.id as string;
     const response = await getTeacherDetail(teacherId, token);
-    console.log(response);
     teacher.value = response.data;
     name.value = teacher.value.name;
     gender.value = teacher.value.gender;
