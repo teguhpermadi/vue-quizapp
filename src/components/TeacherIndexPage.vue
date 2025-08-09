@@ -2,6 +2,15 @@
   <div>
     <h2>Daftar Guru</h2>
     <router-link to="/teachers/create">Tambah Guru</router-link>
+    <div>
+      <input
+        v-model="searchName"
+        @keyup.enter="handleSearch"
+        type="text"
+        placeholder="Cari nama guru..."
+      />
+      <button @click="handleSearch">Cari</button>
+    </div>
     <table>
       <thead>
         <tr>
@@ -47,8 +56,9 @@ const teachers = ref<Teacher[]>([]);
 const loading = ref(false);
 const error = ref('');
 const meta = ref<any>(null);
+const searchName = ref('');
 
-const loadTeachers = async (page = 1) => {
+const loadTeachers = async (page = 1, nameFilter = '') => {
   loading.value = true;
   error.value = '';
   try {
@@ -57,8 +67,11 @@ const loadTeachers = async (page = 1) => {
       error.value = 'Token tidak ditemukan.';
       return;
     }
-    // Kirim parameter page jika backend mendukung
-    const response = await getTeachers(token, page);
+    let urlParams = `?page=${page}`;
+    if (nameFilter) {
+      urlParams += `&filter[name]=${encodeURIComponent(nameFilter)}`;
+    }
+    const response = await getTeachers(token, urlParams);
     teachers.value = response.data;
     meta.value = response.meta;
   } catch (err) {
@@ -68,9 +81,13 @@ const loadTeachers = async (page = 1) => {
   }
 };
 
+const handleSearch = () => {
+  loadTeachers(1, searchName.value);
+};
+
 const goToPage = (page: number) => {
   if (loading.value) return;
-  loadTeachers(page);
+  loadTeachers(page, searchName.value);
 };
 
 const handleDelete = async (id: string) => {
@@ -83,10 +100,10 @@ const handleDelete = async (id: string) => {
       error.value = 'Token tidak ditemukan.';
       return;
     }
-  await deleteTeacher(id, token);
-  // reload data sesuai page aktif
-  const currentPage = meta.value?.current_page ? Number(meta.value.current_page) : 1;
-  await loadTeachers(currentPage);
+    await deleteTeacher(id, token);
+    // reload data sesuai page aktif dan filter
+    const currentPage = meta.value?.current_page ? Number(meta.value.current_page) : 1;
+    await loadTeachers(currentPage, searchName.value);
   } catch (err) {
     error.value = 'Gagal menghapus guru.';
   } finally {
@@ -94,5 +111,5 @@ const handleDelete = async (id: string) => {
   }
 };
 
-onMounted(loadTeachers);
+onMounted(() => loadTeachers());
 </script>
