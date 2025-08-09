@@ -6,6 +6,7 @@ import DashboardPage from '../components/DashboardPage.vue';
 import RegisterPage from '../components/RegisterPage.vue';
 import TeacherIndexPage from '../components/TeacherIndexPage.vue';
 import TeacherCreatePage from '../components/TeacherCreatePage.vue';
+import TeacherShowPage from '../components/TeacherShowPage.vue';
 
 const routes = [
   {
@@ -36,6 +37,7 @@ const routes = [
     children: [
       { path: '', component: TeacherIndexPage },
       { path: 'create', component: TeacherCreatePage },
+      { path: '/teachers/:id', component: TeacherShowPage },
     ]
   }
 ];

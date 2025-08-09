@@ -9,6 +9,7 @@
           <th>Nama</th>
           <th>Gender</th>
           <th>Jumlah Mapel</th>
+          <th>Pilihan</th>
         </tr>
       </thead>
       <tbody>
@@ -17,6 +18,10 @@
           <td>{{ teacher.name }}</td>
           <td>{{ teacher.gender }}</td>
           <td>{{ teacher.subject_count }}</td>
+            <td>
+                <router-link :to="`/teachers/${teacher.id}`">Detail</router-link>
+                <!-- <router-link :to="`/teachers/${teacher.id}/edit`">Edit</router-link> -->
+            </td>
         </tr>
       </tbody>
     </table>
