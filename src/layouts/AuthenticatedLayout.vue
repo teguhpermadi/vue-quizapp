@@ -1,9 +1,12 @@
 <template>
   <div class="auth-layout">
     <header class="auth-header">
-  <span>Welcome, {{ user && user.name ? user.name : 'User' }}</span>
+      <span>Welcome, {{ user && user.name ? user.name : 'User' }}</span>
       <button @click="handleLogout">Logout</button>
     </header>
+    <div>
+      <AppMenu />
+    </div>
     <main>
       <router-view />
     </main>
@@ -13,6 +16,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { logout } from '../services/authService';
+import AppMenu from '../components/AppMenu.vue';
 
 const user = ref<{ name?: string } | null>(null);
 

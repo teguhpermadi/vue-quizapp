@@ -4,6 +4,7 @@ import AuthenticatedLayout from '../layouts/AuthenticatedLayout.vue';
 import LoginPage from '../components/LoginPage.vue';
 import DashboardPage from '../components/DashboardPage.vue';
 import RegisterPage from '../components/RegisterPage.vue';
+import TeacherIndexPage from '../components/TeacherIndexPage.vue';
 
 const routes = [
   {
@@ -27,6 +28,13 @@ const routes = [
       { path: '', component: RegisterPage }
     ] 
   },
+  {
+    path: '/teachers',
+    component: AuthenticatedLayout,
+    children: [
+      { path: '', component: TeacherIndexPage },
+    ]
+  }
 ];
 
 const router = createRouter({
