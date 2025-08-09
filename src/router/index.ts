@@ -7,6 +7,7 @@ import RegisterPage from '../components/RegisterPage.vue';
 import TeacherIndexPage from '../components/TeacherIndexPage.vue';
 import TeacherCreatePage from '../components/TeacherCreatePage.vue';
 import TeacherShowPage from '../components/TeacherShowPage.vue';
+import TeacherEditPage from '../components/TeacherEditPage.vue';
 
 const routes = [
   {
@@ -38,6 +39,7 @@ const routes = [
       { path: '', component: TeacherIndexPage },
       { path: 'create', component: TeacherCreatePage },
       { path: '/teachers/:id', component: TeacherShowPage },
+      { path: ':id/edit', component: TeacherEditPage },
     ]
   }
 ];

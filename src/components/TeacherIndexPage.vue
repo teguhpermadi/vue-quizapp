@@ -20,7 +20,7 @@
           <td>{{ teacher.subject_count }}</td>
             <td>
                 <router-link :to="`/teachers/${teacher.id}`">Detail</router-link>
-                <!-- <router-link :to="`/teachers/${teacher.id}/edit`">Edit</router-link> -->
+                <router-link :to="`/teachers/${teacher.id}/edit`">Edit</router-link>
             </td>
         </tr>
       </tbody>
