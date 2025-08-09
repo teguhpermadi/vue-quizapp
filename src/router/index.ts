@@ -3,6 +3,7 @@ import UnauthenticatedLayout from '../layouts/UnauthenticatedLayout.vue';
 import AuthenticatedLayout from '../layouts/AuthenticatedLayout.vue';
 import LoginPage from '../components/LoginPage.vue';
 import DashboardPage from '../components/DashboardPage.vue';
+import RegisterPage from '../components/RegisterPage.vue';
 
 const routes = [
   {
@@ -18,9 +19,14 @@ const routes = [
     path: '/login',
     component: UnauthenticatedLayout,
     children: [
-      { path: '', component: LoginPage }
+      { path: '', component: LoginPage },
     ]
-  }
+  },
+  { path: '/register', component: UnauthenticatedLayout, 
+    children: [
+      { path: '', component: RegisterPage }
+    ] 
+  },
 ];
 
 const router = createRouter({
