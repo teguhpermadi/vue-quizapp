@@ -34,7 +34,7 @@ const handleLogout = async () => {
   await logout(token);
   localStorage.removeItem('token');
   localStorage.removeItem('user');
-  window.location.href = '/login';
+  window.location.href = '/auth/login'; // Redirect to login page
 };
 </script>
 

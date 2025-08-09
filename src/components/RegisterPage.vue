@@ -21,7 +21,7 @@
       <button type="submit" :disabled="loading">Register</button>
     </form>
     <div>
-      <router-link to="/login">Already have an account? Login here</router-link>
+      <router-link to="/auth/login">Already have an account? Login here</router-link>
     </div>
     <div v-if="error" class="error">{{ error }}</div>
     <div v-if="success" class="success">{{ success }}</div>
