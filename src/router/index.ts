@@ -9,6 +9,9 @@ import TeacherCreatePage from '../components/TeacherCreatePage.vue';
 import TeacherShowPage from '../components/TeacherShowPage.vue';
 import TeacherEditPage from '../components/TeacherEditPage.vue';
 import StudentIndexPage from '../components/StudentIndexPage.vue';
+import StudentShowPage from '../components/StudentShowPage.vue';
+import StudentEditPage from '../components/StudentEditPage.vue';
+import StudentCreatePage from '../components/StudentCreatePage.vue';
 // import StudentCreatePage from '../components/StudentCreatePage.vue';
 // import StudentShowPage from '../components/StudentShowPage.vue';
 // import StudentEditPage from '../components/StudentEditPage.vue';
@@ -52,9 +55,9 @@ const routes = [
     component: AuthenticatedLayout,
     children: [
       { path: '', component: StudentIndexPage },
-      // { path: 'create', component: StudentCreatePage },
-      // { path: '/students/:id', component: StudentShowPage },
-      // { path: ':id/edit', component: StudentEditPage },
+      { path: 'create', component: StudentCreatePage },
+      { path: '/students/:id', component: StudentShowPage },
+      { path: ':id/edit', component: StudentEditPage },
     ]
   }
 ];
