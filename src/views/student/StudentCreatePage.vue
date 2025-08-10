@@ -67,7 +67,19 @@ const handleSubmit = async () => {
     nis.value = '';
     router.push('/students'); // redirect
   } catch (err) {
-    error.value = 'Gagal menambah siswa.';
+    if (err.response && err.response.data) {
+      // Tampilkan pesan utama
+      error.value = err.response.data.message || "Gagal menambah siswa.";
+      // Jika ada detail errors, gabungkan semua pesan error
+      if (err.response.data.errors) {
+        const errorList = Object.values(err.response.data.errors)
+          .flat()
+          .join(" ");
+        error.value += " " + errorList;
+      }
+    } else {
+      error.value = "Gagal menambah siswa.";
+    }
   } finally {
     loading.value = false;
   }

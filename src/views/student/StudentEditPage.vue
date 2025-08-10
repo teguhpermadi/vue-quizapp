@@ -88,7 +88,19 @@ const handleSubmit = async () => {
     success.value = response.message;
     router.push('/students'); // redirect
   } catch (err) {
-    error.value = 'Gagal mengupdate data siswa.';
+    if (err.response && err.response.data) {
+      // Tampilkan pesan utama
+      error.value = err.response.data.message || "Gagal mengupdate data siswa.";
+      // Jika ada detail errors, gabungkan semua pesan error
+      if (err.response.data.errors) {
+        const errorList = Object.values(err.response.data.errors)
+          .flat()
+          .join(" ");
+        error.value += " " + errorList;
+      }
+    } else {
+      error.value = "Gagal mengupdate data siswa.";
+    }
   } finally {
     loading.value = false;
   }

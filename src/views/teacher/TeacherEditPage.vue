@@ -81,7 +81,19 @@ const handleSubmit = async () => {
     success.value = response.message;
     router.push('/teachers'); // redirect
   } catch (err) {
-    error.value = 'Gagal mengupdate data guru.';
+    if (err.response && err.response.data) {
+      // Tampilkan pesan utama
+      error.value = err.response.data.message || "Gagal mengupdate guru.";
+      // Jika ada detail errors, gabungkan semua pesan error
+      if (err.response.data.errors) {
+        const errorList = Object.values(err.response.data.errors)
+          .flat()
+          .join(" ");
+        error.value += " " + errorList;
+      }
+    } else {
+      error.value = "Gagal mengupdate guru.";
+    }
   } finally {
     loading.value = false;
   }

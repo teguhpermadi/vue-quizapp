@@ -27,36 +27,51 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { addTeacher } from '../../services/teacherService';
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { addTeacher } from "../../services/teacherService";
 
-const name = ref('');
-const gender = ref('');
-const nip = ref('');
+const name = ref("");
+const gender = ref("");
+const nip = ref("");
 const loading = ref(false);
-const error = ref('');
-const success = ref('');
+const error = ref("");
+const success = ref("");
 const router = useRouter();
 
 const handleSubmit = async () => {
-  error.value = '';
-  success.value = '';
+  error.value = "";
+  success.value = "";
   loading.value = true;
   try {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (!token) {
-      error.value = 'Token tidak ditemukan.';
+      error.value = "Token tidak ditemukan.";
       return;
     }
-    const response = await addTeacher({ name: name.value, gender: gender.value, nip: nip.value }, token);
+    const response = await addTeacher(
+      { name: name.value, gender: gender.value, nip: nip.value },
+      token
+    );
     success.value = response.message;
-    name.value = '';
-    gender.value = '';
-    nip.value = '';
-    router.push('/teachers'); // redirect
+    name.value = "";
+    gender.value = "";
+    nip.value = "";
+    router.push("/teachers"); // redirect
   } catch (err) {
-    error.value = 'Gagal menambah guru.';
+    if (err.response && err.response.data) {
+      // Tampilkan pesan utama
+      error.value = err.response.data.message || "Gagal menambah guru.";
+      // Jika ada detail errors, gabungkan semua pesan error
+      if (err.response.data.errors) {
+        const errorList = Object.values(err.response.data.errors)
+          .flat()
+          .join(" ");
+        error.value += " " + errorList;
+      }
+    } else {
+      error.value = "Gagal menambah guru.";
+    }
   } finally {
     loading.value = false;
   }
@@ -70,7 +85,7 @@ const handleSubmit = async () => {
   padding: 24px;
   border-radius: 8px;
   background: #fff;
-  box-shadow: 0 2px 8px rgba(66,185,131,0.08);
+  box-shadow: 0 2px 8px rgba(66, 185, 131, 0.08);
 }
 .teacher-create-container h2 {
   text-align: center;

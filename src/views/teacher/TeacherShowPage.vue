@@ -4,6 +4,7 @@
     <div v-if="loading">Loading...</div>
     <div v-if="error">{{ error }}</div>
     <div v-if="teacher">
+      <router-link :to="`/teachers/${teacher.id}/edit`">Edit Guru</router-link>
       <p><strong>ID:</strong> {{ teacher.id }}</p>
       <p><strong>Nama:</strong> {{ teacher.name }}</p>
       <p><strong>Gender:</strong> {{ teacher.gender }}</p>
