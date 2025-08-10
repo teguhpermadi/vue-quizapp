@@ -29,7 +29,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { addTeacher } from '../services/teacherService';
+import { addTeacher } from '../../services/teacherService';
 
 const name = ref('');
 const gender = ref('');

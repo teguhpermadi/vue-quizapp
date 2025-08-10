@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import type { User } from '../services/authService';
+import type { User } from '../../services/authService';
 
 const user = ref<User | null>(null);
 

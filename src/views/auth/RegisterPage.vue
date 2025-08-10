@@ -32,7 +32,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { register, RegisterResponse } from '../services/authService';
+import { register, RegisterResponse } from '../../services/authService';
 
 const name = ref('');
 const email = ref('');

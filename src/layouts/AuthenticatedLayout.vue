@@ -16,7 +16,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { logout } from '../services/authService';
-import AppMenu from '../components/AppMenu.vue';
+import AppMenu from './AppMenu.vue';
 
 const user = ref<{ name?: string } | null>(null);
 

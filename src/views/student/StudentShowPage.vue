@@ -27,7 +27,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import { getStudentDetail, Student } from '../services/studentService';
+import { getStudentDetail, Student } from '../../services/studentService';
 
 const route = useRoute();
 const student = ref<Student | null>(null);

@@ -27,7 +27,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import { getTeacherDetail, Teacher } from '../services/teacherService';
+import { getTeacherDetail, Teacher } from '../../services/teacherService';
 
 const route = useRoute();
 const teacher = ref<Teacher | null>(null);

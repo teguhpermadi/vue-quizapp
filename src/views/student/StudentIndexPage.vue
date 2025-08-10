@@ -1,13 +1,13 @@
 <template>
   <div>
-    <h2>Daftar Guru</h2>
-    <router-link to="/teachers/create">Tambah Guru</router-link>
+    <h2>Daftar Siswa</h2>
+    <router-link to="/students/create">Tambah Siswa</router-link>
     <div>
       <input
         v-model="searchName"
         @keyup.enter="handleSearch"
         type="text"
-        placeholder="Cari nama guru..."
+        placeholder="Cari nama siswa..."
       />
       <button @click="handleSearch">Cari</button>
     </div>
@@ -16,20 +16,22 @@
         <tr>
           <th>Nama</th>
           <th>Gender</th>
-          <th>Jumlah Mapel</th>
+          <th>NISN</th>
+          <th>NIS</th>
           <th>Pilihan</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="teacher in teachers" :key="teacher.id">
-          <td>{{ teacher.name }}</td>
-          <td>{{ teacher.gender }}</td>
-          <td>{{ teacher.subject_count }}</td>
-      <td>
-        <router-link :to="`/teachers/${teacher.id}`">Detail</router-link>
-        <router-link :to="`/teachers/${teacher.id}/edit`">Edit</router-link>
-        <button @click="handleDelete(teacher.id)">Delete</button>
-      </td>
+        <tr v-for="student in students" :key="student.id">
+          <td>{{ student.name }}</td>
+          <td>{{ student.gender }}</td>
+          <td>{{ student.nisn }}</td>
+          <td>{{ student.nis }}</td>
+          <td>
+            <router-link :to="`/students/${student.id}`">Detail</router-link>
+            <router-link :to="`/students/${student.id}/edit`">Edit</router-link>
+            <button @click="handleDelete(student.id)">Delete</button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -48,15 +50,15 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { getTeachers, Teacher, deleteTeacher } from '../services/teacherService';
+import { getStudents, deleteStudent, Student } from '../../services/studentService';
 
-const teachers = ref<Teacher[]>([]);
+const students = ref<Student[]>([]);
 const loading = ref(false);
 const error = ref('');
 const meta = ref<any>(null);
 const searchName = ref('');
 
-const loadTeachers = async (page = 1, nameFilter = '') => {
+const loadStudents = async (page = 1, nameFilter = '') => {
   loading.value = true;
   error.value = '';
   try {
@@ -69,27 +71,27 @@ const loadTeachers = async (page = 1, nameFilter = '') => {
     if (nameFilter) {
       urlParams += `&filter[name]=${encodeURIComponent(nameFilter)}`;
     }
-    const response = await getTeachers(token, urlParams);
-    teachers.value = response.data;
+    const response = await getStudents(token, urlParams);
+    students.value = response.data;
     meta.value = response.meta;
   } catch (err) {
-    error.value = 'Gagal memuat data guru.';
+    error.value = 'Gagal memuat data siswa.';
   } finally {
     loading.value = false;
   }
 };
 
 const handleSearch = () => {
-  loadTeachers(1, searchName.value);
+  loadStudents(1, searchName.value);
 };
 
 const goToPage = (page: number) => {
   if (loading.value) return;
-  loadTeachers(page, searchName.value);
+  loadStudents(page, searchName.value);
 };
 
 const handleDelete = async (id: string) => {
-  if (!confirm('Yakin ingin menghapus guru ini?')) return;
+  if (!confirm('Yakin ingin menghapus siswa ini?')) return;
   loading.value = true;
   error.value = '';
   try {
@@ -98,16 +100,16 @@ const handleDelete = async (id: string) => {
       error.value = 'Token tidak ditemukan.';
       return;
     }
-    await deleteTeacher(id, token);
+    await deleteStudent(token, id);
     // reload data sesuai page aktif dan filter
     const currentPage = meta.value?.current_page ? Number(meta.value.current_page) : 1;
-    await loadTeachers(currentPage, searchName.value);
+    await loadStudents(currentPage, searchName.value);
   } catch (err) {
-    error.value = 'Gagal menghapus guru.';
+    error.value = 'Gagal menghapus siswa.';
   } finally {
     loading.value = false;
   }
 };
 
-onMounted(() => loadTeachers());
+onMounted(() => loadStudents());
 </script>

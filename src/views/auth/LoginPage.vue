@@ -24,7 +24,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { login, LoginResponse } from '../services/authService';
+import { login, LoginResponse } from '../../services/authService';
 
 const email = ref('');
 const password = ref('');
