@@ -3,7 +3,7 @@
     <ul>
       <li><router-link to="/">Dashboard</router-link></li>
       <li><router-link to="/teachers">Daftar Guru</router-link></li>
-      <!-- Tambahkan menu lain di sini jika perlu -->
+      <li><router-link to="/students">Daftar Siswa</router-link></li>
     </ul>
   </nav>
 </template>
