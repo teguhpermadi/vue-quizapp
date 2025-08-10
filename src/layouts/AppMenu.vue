@@ -4,6 +4,7 @@
       <li><router-link to="/">Dashboard</router-link></li>
       <li><router-link to="/teachers">Daftar Guru</router-link></li>
       <li><router-link to="/students">Daftar Siswa</router-link></li>
+      <li><router-link to="/grades">Daftar Grade</router-link></li>
     </ul>
   </nav>
 </template>

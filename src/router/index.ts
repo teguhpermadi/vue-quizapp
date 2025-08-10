@@ -12,6 +12,10 @@ import StudentIndexPage from '../views/student/StudentIndexPage.vue';
 import StudentShowPage from '../views/student/StudentShowPage.vue';
 import StudentEditPage from '../views/student/StudentEditPage.vue';
 import StudentCreatePage from '../views/student/StudentCreatePage.vue';
+import GradeIndexPage from '../views/grade/GradeIndexPage.vue';
+import GradeCreatePage from '../views/grade/GradeCreatePage.vue';
+import GradeShowPage from '../views/grade/GradeShowPage.vue';
+import GradeEditPage from '../views/grade/GradeEditPage.vue';
 // import StudentCreatePage from '../components/StudentCreatePage.vue';
 // import StudentShowPage from '../components/StudentShowPage.vue';
 // import StudentEditPage from '../components/StudentEditPage.vue';
@@ -58,6 +62,16 @@ const routes = [
       { path: 'create', component: StudentCreatePage },
       { path: '/students/:id', component: StudentShowPage },
       { path: ':id/edit', component: StudentEditPage },
+    ]
+  },
+  {
+    path: '/grades',
+    component: AuthenticatedLayout,
+    children: [
+      { path: '', component: GradeIndexPage },
+      { path: 'create', component: GradeCreatePage },
+      { path: '/grades/:id', component: GradeShowPage },
+      { path: ':id/edit', component: GradeEditPage },
     ]
   }
 ];
