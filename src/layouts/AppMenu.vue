@@ -5,6 +5,7 @@
       <li><router-link to="/teachers">Daftar Guru</router-link></li>
       <li><router-link to="/students">Daftar Siswa</router-link></li>
       <li><router-link to="/grades">Daftar Grade</router-link></li>
+      <li><router-link to="/academic-years">Daftar Tahun Pelajaran</router-link></li>
     </ul>
   </nav>
 </template>

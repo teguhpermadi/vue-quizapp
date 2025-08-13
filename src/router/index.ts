@@ -16,6 +16,7 @@ import GradeIndexPage from '../views/grade/GradeIndexPage.vue';
 import GradeCreatePage from '../views/grade/GradeCreatePage.vue';
 import GradeShowPage from '../views/grade/GradeShowPage.vue';
 import GradeEditPage from '../views/grade/GradeEditPage.vue';
+import AcademicYearIndexPage from '../views/academic/AcademicYearIndexPage.vue';
 // import StudentCreatePage from '../components/StudentCreatePage.vue';
 // import StudentShowPage from '../components/StudentShowPage.vue';
 // import StudentEditPage from '../components/StudentEditPage.vue';
@@ -38,11 +39,6 @@ const routes = [
       { path: 'register', component: RegisterPage }
     ]
   },
-  // { path: '/register', component: UnauthenticatedLayout, 
-  //   children: [
-  //     { path: 'register', component: RegisterPage }
-  //   ] 
-  // },
   {
     path: '/teachers',
     component: AuthenticatedLayout,
@@ -72,6 +68,13 @@ const routes = [
       { path: 'create', component: GradeCreatePage },
       { path: '/grades/:id', component: GradeShowPage },
       { path: ':id/edit', component: GradeEditPage },
+    ]
+  },
+  {
+    path: '/academic-years',
+    component: AuthenticatedLayout,
+    children: [
+      { path: '', component: AcademicYearIndexPage },
     ]
   }
 ];
