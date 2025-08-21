@@ -61,6 +61,7 @@ export interface AcademicYear {
   semester: string;
   teacher_id: string;
   teacher: Teacher;
+  is_active: boolean;
   created_at: string;
   updated_at: string;
 }
@@ -118,6 +119,16 @@ export interface DeleteAcademicYearResponse {
   message: string;
 }
 
+export interface SetAcademicYearActivePayload {
+  academic_year_id: string;
+}
+
+export interface SetAcademicYearActiveResponse {
+  status: string;
+  message: string;
+  data: AcademicYear;
+}
+
 export async function getAcademicYears(token: string, queryParams: string = ''): Promise<AcademicYearsResponse> {
   const response = await axios.get(`${API_BASE_URL}/academic-years${queryParams}`, {
     headers: {
@@ -156,6 +167,15 @@ export async function updateAcademicYear(token: string, academicYearId: string, 
 
 export async function deleteAcademicYear(token: string, academicYearId: string): Promise<DeleteAcademicYearResponse> {
   const response = await axios.delete(`${API_BASE_URL}/academic-years/${academicYearId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+}
+
+export async function setAcademicYearActive(token: string, payload: SetAcademicYearActivePayload): Promise<SetAcademicYearActiveResponse> {
+  const response = await axios.post(`${API_BASE_URL}/academic-years/set-active`, payload, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

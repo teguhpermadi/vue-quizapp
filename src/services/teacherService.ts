@@ -85,9 +85,25 @@ export interface AddTeacherResponse {
   data: Teacher;
 }
 
+export interface Grade {
+  id: string;
+  name: string;
+  level: string;
+}
+
+export interface TeacherSubjectResponse {
+  id : string;
+  teacher_id: string;
+  subject_id: string;
+  grade_id: string;
+  subject: Subject;
+  teacher: Teacher;
+  grade: Grade;
+}
+
 export interface TeacherDetailResponse {
   status: string;
-  data: Teacher;
+  data: TeacherSubjectResponse;
 }
 
 

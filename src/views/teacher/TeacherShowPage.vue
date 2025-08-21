@@ -15,12 +15,9 @@
       <h3>Subjects</h3>
       <ul>
         <li v-for="subject in teacher.subjects" :key="subject.id">
-          {{ subject.name }} ({{ subject.code }})
+          {{ subject.subject.name }} ({{ subject.subject.code }}) - {{ subject.grade.name }}
         </li>
       </ul>
-      <h3>User</h3>
-      <p><strong>Nama User:</strong> {{ teacher.user?.name }}</p>
-      <p><strong>Email User:</strong> {{ teacher.user?.email }}</p>
     </div>
   </div>
 </template>
@@ -46,6 +43,7 @@ onMounted(async () => {
     }
     const teacherId = route.params.id as string;
     const response = await getTeacherDetail(teacherId, token);
+    console.log('Teacher detail response:', response);
     teacher.value = response.data;
   } catch (err) {
     error.value = 'Gagal memuat data guru.';

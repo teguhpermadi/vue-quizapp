@@ -7,6 +7,7 @@
                 <tr>
                     <th>Tahun</th>
                     <th>Semester</th>
+                    <th>Aktif</th>
                     <th>Pilihan</th>
                 </tr>
             </thead>
@@ -15,9 +16,15 @@
                     <td>{{ year.year }}</td>
                     <td>{{ year.semester }}</td>
                     <td>
-                        <router-link :to="`/academic-years/${year.id}`">Detail</router-link>
-                        <router-link :to="`/academic-years/${year.id}/edit`">Edit</router-link>
+                        <!-- if year.is_active -->
+                        <span v-if="year.is_active">Aktif</span>
+                        <span v-else>Tidak Aktif</span>
+                    </td>
+                    <td>
+                        <!-- <router-link :to="`/academic-years/${year.id}`">Detail</router-link> -->
+                        <!-- <router-link :to="`/academic-years/${year.id}/edit`">Edit</router-link> -->
                         <button @click="handleDelete(year.id)">Delete</button>
+                        <button @click="setActiveYear(year.id)" v-bind:hidden="year.is_active">Aktifkan</button>
                     </td>
                 </tr>
             </tbody>
@@ -36,7 +43,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { getAcademicYears, deleteAcademicYear, AcademicYear, AcademicYearsResponse } from '../../services/academicYearService';
+import { getAcademicYears, deleteAcademicYear, AcademicYear, AcademicYearsResponse, setAcademicYearActive } from '../../services/academicYearService';
 
 const academicYears = ref<AcademicYear[]>([]);
 const loading = ref(false);
@@ -84,6 +91,27 @@ const handleDelete = async (id: string) => {
         await loadAcademicYears(currentPage);
     } catch (err) {
         error.value = 'Gagal menghapus tahun pelajaran.';
+    } finally {
+        loading.value = false;
+    }
+};
+
+const setActiveYear = async (id: string) => {
+    loading.value = true;
+    error.value = '';
+    try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            error.value = 'Token tidak ditemukan.';
+            return;
+        }
+        const payload = { academic_year_id: id };
+        await setAcademicYearActive(token, payload);
+        // reload data sesuai page aktif dan filter
+        const currentPage = meta.value?.current_page ? Number(meta.value.current_page) : 1;
+        await loadAcademicYears(currentPage);
+    } catch (err) {
+        error.value = 'Gagal mengatur tahun pelajaran aktif.';
     } finally {
         loading.value = false;
     }

@@ -17,6 +17,7 @@ import GradeCreatePage from '../views/grade/GradeCreatePage.vue';
 import GradeShowPage from '../views/grade/GradeShowPage.vue';
 import GradeEditPage from '../views/grade/GradeEditPage.vue';
 import AcademicYearIndexPage from '../views/academic/AcademicYearIndexPage.vue';
+import AcademicYearCreatePage from '../views/academic/AcademicYearCreatePage.vue';
 // import StudentCreatePage from '../components/StudentCreatePage.vue';
 // import StudentShowPage from '../components/StudentShowPage.vue';
 // import StudentEditPage from '../components/StudentEditPage.vue';
@@ -75,6 +76,7 @@ const routes = [
     component: AuthenticatedLayout,
     children: [
       { path: '', component: AcademicYearIndexPage },
+      { path: 'create', component: AcademicYearCreatePage },
     ]
   }
 ];
