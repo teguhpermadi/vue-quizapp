@@ -18,6 +18,7 @@
           <th>Gender</th>
           <th>NISN</th>
           <th>NIS</th>
+          <th>Grade</th>
           <th>Pilihan</th>
         </tr>
       </thead>
@@ -27,6 +28,12 @@
           <td>{{ student.gender }}</td>
           <td>{{ student.nisn }}</td>
           <td>{{ student.nis }}</td>
+          <td>
+            <span v-if="student.studentGrades && student.studentGrades.length">
+              {{ student.studentGrades[0].grade.name }}
+            </span>
+            <span v-else>-</span>
+          </td>
           <td>
             <router-link :to="`/students/${student.id}`">Detail</router-link>
             <router-link :to="`/students/${student.id}/edit`">Edit</router-link>

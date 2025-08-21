@@ -68,7 +68,6 @@ export interface Grade {
   id: string;
   name: string;
   level: number;
-  student_count: string;
   students: any[];
   created_at: string;
   updated_at: string;
@@ -80,7 +79,7 @@ export interface StudentGrade {
   student_id: string;
   grade_id: string;
   academic_year: AcademicYear;
-  student: any;
+  student: Student;
   grade: Grade;
   created_at: string;
   updated_at: string;
