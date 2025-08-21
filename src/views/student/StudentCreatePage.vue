@@ -1,14 +1,17 @@
 <template>
-  <div class="student-create-container">
+  <div class="card">
+    <div class="card-header">
     <h2>Tambah Siswa Baru</h2>
+    </div>
+    <div class="card-body">
     <form @submit.prevent="handleSubmit">
       <div>
         <label>Nama:</label>
-        <input v-model="name" type="text" required />
+        <input v-model="name" type="text" required class="form-control"/>
       </div>
       <div>
         <label>Gender:</label>
-        <select v-model="gender" required>
+        <select v-model="gender" required class="form-control">
           <option value="">Pilih Gender</option>
           <option value="male">Laki-laki</option>
           <option value="female">Perempuan</option>
@@ -16,17 +19,18 @@
       </div>
       <div>
         <label>NISN:</label>
-        <input v-model="nisn" type="text" required />
+        <input v-model="nisn" type="text" required class="form-control"/>
       </div>
       <div>
         <label>NIS:</label>
-        <input v-model="nis" type="text" required />
+        <input v-model="nis" type="text" required class="form-control"/>
       </div>
-      <button type="submit" :disabled="loading">Simpan</button>
+      <button type="submit" :disabled="loading" class="btn btn-primary">Simpan</button>
     </form>
     <div v-if="error" class="error">{{ error }}</div>
     <div v-if="success" class="success">{{ success }}</div>
     <div v-if="loading" class="loading">Loading...</div>
+  </div>
   </div>
 </template>
 
@@ -87,61 +91,4 @@ const handleSubmit = async () => {
 </script>
 
 <style scoped>
-.student-create-container {
-  max-width: 400px;
-  margin: 40px auto;
-  padding: 24px;
-  border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(66,185,131,0.08);
-}
-.student-create-container h2 {
-  text-align: center;
-  margin-bottom: 24px;
-  color: #42b983;
-}
-.student-create-container form > div {
-  margin-bottom: 16px;
-}
-.student-create-container label {
-  display: block;
-  margin-bottom: 4px;
-  color: #333;
-}
-.student-create-container input,
-.student-create-container select {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-.student-create-container button {
-  width: 100%;
-  padding: 10px;
-  background: #42b983;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-}
-.student-create-container button:disabled {
-  background: #aaa;
-}
-.error {
-  color: #d32f2f;
-  margin-top: 16px;
-  text-align: center;
-}
-.success {
-  color: #388e3c;
-  margin-top: 16px;
-  text-align: center;
-}
-.loading {
-  margin-top: 16px;
-  color: #42b983;
-  text-align: center;
-}
 </style>

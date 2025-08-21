@@ -1,6 +1,9 @@
 <template>
-  <div class="student-show-container">
-    <h2>Detail Siswa</h2>
+  <div class="card">
+    <div class="card-header">
+      <h2>Detail Siswa</h2>
+    </div>
+    <div class="card-body">
     <div v-if="loading">Loading...</div>
     <div v-if="error">{{ error }}</div>
     <div v-if="student">
@@ -10,17 +13,16 @@
       <p><strong>Gender:</strong> {{ student.gender }}</p>
       <p><strong>NISN:</strong> {{ student.nisn }}</p>
       <p><strong>NIS:</strong> {{ student.nis }}</p>
-      <p><strong>Created At:</strong> {{ student.created_at }}</p>
-      <p><strong>Updated At:</strong> {{ student.updated_at }}</p>
       <h3>User</h3>
   <p><strong>Nama User:</strong> {{ student.user ? student.user.name : '-' }}</p>
   <p><strong>Email User:</strong> {{ student.user ? student.user.email : '-' }}</p>
       <h3>Grades</h3>
       <ul>
-        <li v-for="grade in student.grades" :key="grade.id">
-          {{ grade.grade ? grade.grade.name : '-' }} (Tahun: {{ grade.academic_year ? grade.academic_year.year : '-' }}, Semester: {{ grade.academic_year ? grade.academic_year.semester : '-' }})
+        <li v-for="grade in student.studentGrades" :key="grade.id">
+          {{ grade.grade.name }}
         </li>
       </ul>
+    </div>
     </div>
   </div>
 </template>
@@ -56,28 +58,5 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.student-show-container {
-  max-width: 500px;
-  margin: 40px auto;
-  padding: 24px;
-  border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(66,185,131,0.08);
-}
-.student-show-container h2 {
-  text-align: center;
-  margin-bottom: 24px;
-  color: #42b983;
-}
-.student-show-container h3 {
-  margin-top: 24px;
-  color: #42b983;
-}
-.student-show-container p {
-  margin: 8px 0;
-}
-.student-show-container ul {
-  margin: 0;
-  padding-left: 20px;
-}
+
 </style>

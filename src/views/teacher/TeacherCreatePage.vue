@@ -1,14 +1,15 @@
 <template>
-  <div class="teacher-create-container">
+  <div class="card">
+    <div class="card-body">
     <h2>Tambah Guru Baru</h2>
     <form @submit.prevent="handleSubmit">
       <div>
         <label>Nama:</label>
-        <input v-model="name" type="text" required />
+        <input v-model="name" type="text" required class="form-control"/>
       </div>
       <div>
         <label>Gender:</label>
-        <select v-model="gender" required>
+        <select v-model="gender" required class="form-control">
           <option value="">Pilih Gender</option>
           <option value="male">Laki-laki</option>
           <option value="female">Perempuan</option>
@@ -16,13 +17,14 @@
       </div>
       <div>
         <label>NIP:</label>
-        <input v-model="nip" type="text" required />
+        <input v-model="nip" type="text" required class="form-control"/>
       </div>
-      <button type="submit" :disabled="loading">Simpan</button>
+      <button type="submit" :disabled="loading" class="btn btn-primary">Simpan</button>
     </form>
     <div v-if="error" class="error">{{ error }}</div>
     <div v-if="success" class="success">{{ success }}</div>
     <div v-if="loading" class="loading">Loading...</div>
+  </div>
   </div>
 </template>
 
@@ -79,61 +81,5 @@ const handleSubmit = async () => {
 </script>
 
 <style scoped>
-.teacher-create-container {
-  max-width: 400px;
-  margin: 40px auto;
-  padding: 24px;
-  border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(66, 185, 131, 0.08);
-}
-.teacher-create-container h2 {
-  text-align: center;
-  margin-bottom: 24px;
-  color: #42b983;
-}
-.teacher-create-container form > div {
-  margin-bottom: 16px;
-}
-.teacher-create-container label {
-  display: block;
-  margin-bottom: 4px;
-  color: #333;
-}
-.teacher-create-container input,
-.teacher-create-container select {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-.teacher-create-container button {
-  width: 100%;
-  padding: 10px;
-  background: #42b983;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-}
-.teacher-create-container button:disabled {
-  background: #aaa;
-}
-.error {
-  color: #d32f2f;
-  margin-top: 16px;
-  text-align: center;
-}
-.success {
-  color: #388e3c;
-  margin-top: 16px;
-  text-align: center;
-}
-.loading {
-  margin-top: 16px;
-  color: #42b983;
-  text-align: center;
-}
+
 </style>

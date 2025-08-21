@@ -1,16 +1,19 @@
 <template>
-  <div class="login-container">
-    <h2>Login</h2>
+  <div class="card">
+    <div class="card-header">
+      <h2>Login</h2>
+    </div>
+    <div class="card-body">
     <form @submit.prevent="handleLogin">
       <div>
         <label>Email:</label>
-        <input v-model="email" type="email" required />
+        <input v-model="email" type="email" required class="form-control"/>
       </div>
       <div>
         <label>Password:</label>
-        <input v-model="password" type="password" required />
+        <input v-model="password" type="password" required class="form-control"/>
       </div>
-      <button type="submit" :disabled="loading">Login</button>
+      <button type="submit" :disabled="loading" class="btn btn-primary">Login</button>
     </form>
         <div>
             <router-link to="/auth/register">Don't have an account? Register here</router-link>
@@ -18,6 +21,7 @@
     <div v-if="error" class="error">{{ error }}</div>
     <div v-if="success" class="success">{{ success }}</div>
     <div v-if="loading" class="loading">Loading...</div>
+    </div>
   </div>
 </template>
 

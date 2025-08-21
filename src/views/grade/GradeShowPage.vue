@@ -1,5 +1,6 @@
 <template>
-  <div class="grade-show-container">
+  <div class="card">
+    <div class="card-body">
     <h2>Detail Grade</h2>
     <div v-if="loading">Loading...</div>
     <div v-if="error">{{ error }}</div>
@@ -11,11 +12,12 @@
       <p><strong>Dibuat:</strong> {{ grade.created_at }}</p>
       <p><strong>Diupdate:</strong> {{ grade.updated_at }}</p>
       <h3>Daftar Siswa</h3>
-      <ul>
+      <ol>
         <li v-for="studentGrade in grade.students" :key="studentGrade.id">
           {{ studentGrade.student ? studentGrade.student.name : '-' }} (NISN: {{ studentGrade.student ? studentGrade.student.nisn : '-' }})
         </li>
-      </ul>
+      </ol>
+    </div>
     </div>
   </div>
 </template>
@@ -51,28 +53,5 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.grade-show-container {
-  max-width: 500px;
-  margin: 40px auto;
-  padding: 24px;
-  border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(66,185,131,0.08);
-}
-.grade-show-container h2 {
-  text-align: center;
-  margin-bottom: 24px;
-  color: #42b983;
-}
-.grade-show-container h3 {
-  margin-top: 24px;
-  color: #42b983;
-}
-.grade-show-container p {
-  margin: 8px 0;
-}
-.grade-show-container ul {
-  margin: 0;
-  padding-left: 20px;
-}
+
 </style>

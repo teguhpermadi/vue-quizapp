@@ -1,31 +1,35 @@
 <template>
-  <div class="student-edit-container">
+  <div class="card">
+    <div class="card-header">
     <h2>Edit Siswa</h2>
+    </div>
+    <div class="card-body">
     <form v-if="student" @submit.prevent="handleSubmit">
       <div>
         <label>Nama:</label>
-        <input v-model="name" type="text" required />
+        <input v-model="name" type="text" required class="form-control"/>
       </div>
       <div>
         <label>Gender:</label>
-        <select v-model="gender" required>
+        <select v-model="gender" required class="form-control">
           <option value="male">Laki-laki</option>
           <option value="female">Perempuan</option>
         </select>
       </div>
       <div>
         <label>NISN:</label>
-        <input v-model="nisn" type="text" required />
+        <input v-model="nisn" type="text" required class="form-control"/>
       </div>
       <div>
         <label>NIS:</label>
-        <input v-model="nis" type="text" required />
+        <input v-model="nis" type="text" required class="form-control"/>
       </div>
-      <button type="submit" :disabled="loading">Simpan Perubahan</button>
+      <button type="submit" :disabled="loading" class="btn btn-primary">Simpan Perubahan</button>
     </form>
     <div v-if="loading">Loading...</div>
     <div v-if="error" class="error">{{ error }}</div>
     <div v-if="success" class="success">{{ success }}</div>
+  </div>
   </div>
 </template>
 
@@ -108,56 +112,4 @@ const handleSubmit = async () => {
 </script>
 
 <style scoped>
-.student-edit-container {
-  max-width: 400px;
-  margin: 40px auto;
-  padding: 24px;
-  border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(66,185,131,0.08);
-}
-.student-edit-container h2 {
-  text-align: center;
-  margin-bottom: 24px;
-  color: #42b983;
-}
-.student-edit-container form > div {
-  margin-bottom: 16px;
-}
-.student-edit-container label {
-  display: block;
-  margin-bottom: 4px;
-  color: #333;
-}
-.student-edit-container input,
-.student-edit-container select {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-.student-edit-container button {
-  width: 100%;
-  padding: 10px;
-  background: #42b983;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-}
-.student-edit-container button:disabled {
-  background: #aaa;
-}
-.error {
-  color: #d32f2f;
-  margin-top: 16px;
-  text-align: center;
-}
-.success {
-  color: #388e3c;
-  margin-top: 16px;
-  text-align: center;
-}
 </style>

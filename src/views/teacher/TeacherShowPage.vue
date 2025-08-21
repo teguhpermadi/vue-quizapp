@@ -1,5 +1,6 @@
 <template>
-  <div class="teacher-show-container">
+  <div class="card">
+    <div class="card-body">
     <h2>Detail Guru</h2>
     <div v-if="loading">Loading...</div>
     <div v-if="error">{{ error }}</div>
@@ -10,14 +11,13 @@
       <p><strong>Gender:</strong> {{ teacher.gender }}</p>
       <p><strong>NIP:</strong> {{ teacher.nip || '-' }}</p>
       <p><strong>Jumlah Mapel:</strong> {{ teacher.subject_count }}</p>
-      <p><strong>Created At:</strong> {{ teacher.created_at }}</p>
-      <p><strong>Updated At:</strong> {{ teacher.updated_at }}</p>
       <h3>Subjects</h3>
       <ul>
         <li v-for="subject in teacher.subjects" :key="subject.id">
           {{ subject.subject.name }} ({{ subject.subject.code }}) - {{ subject.grade.name }}
         </li>
       </ul>
+    </div>
     </div>
   </div>
 </template>
@@ -54,28 +54,5 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.teacher-show-container {
-  max-width: 500px;
-  margin: 40px auto;
-  padding: 24px;
-  border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(66,185,131,0.08);
-}
-.teacher-show-container h2 {
-  text-align: center;
-  margin-bottom: 24px;
-  color: #42b983;
-}
-.teacher-show-container h3 {
-  margin-top: 24px;
-  color: #42b983;
-}
-.teacher-show-container p {
-  margin: 8px 0;
-}
-.teacher-show-container ul {
-  margin: 0;
-  padding-left: 20px;
-}
+
 </style>

@@ -1,24 +1,27 @@
 <template>
-  <div class="register-container">
+  <div class="card">
+    <div class="card-header">
     <h2>Register</h2>
+    </div>
+    <div class="card-body">
     <form @submit.prevent="handleRegister">
       <div>
         <label>Name:</label>
-        <input v-model="name" type="text" required />
+        <input v-model="name" type="text" required class="form-control"/>
       </div>
       <div>
         <label>Email:</label>
-        <input v-model="email" type="email" required />
+        <input v-model="email" type="email" required class="form-control"/>
       </div>
       <div>
         <label>Password:</label>
-        <input v-model="password" type="password" required />
+        <input v-model="password" type="password" required class="form-control"/>
       </div>
       <div>
         <label>Confirm Password:</label>
-        <input v-model="passwordConfirmation" type="password" required />
+        <input v-model="passwordConfirmation" type="password" required class="form-control"/>
       </div>
-      <button type="submit" :disabled="loading">Register</button>
+      <button type="submit" :disabled="loading" class="btn btn-primary">Register</button>
     </form>
     <div>
       <router-link to="/auth/login">Already have an account? Login here</router-link>
@@ -26,6 +29,7 @@
     <div v-if="error" class="error">{{ error }}</div>
     <div v-if="success" class="success">{{ success }}</div>
     <div v-if="loading" class="loading">Loading...</div>
+  </div>
   </div>
 </template>
 
