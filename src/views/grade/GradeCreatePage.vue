@@ -11,6 +11,7 @@
         <label>Level:</label>
         <input v-model.number="level" type="number" min="1" required class="form-control"/>
       </div>
+      <StudentSelect v-model="studentSelected"/>
       <button type="submit" :disabled="loading" class="btn btn-primary">Simpan</button>
     </form>
     <div v-if="error" class="error">{{ error }}</div>
@@ -24,6 +25,7 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { addGrade } from '../../services/gradeService';
+import StudentSelect from '../../components/grade/StudentSelect.vue';
 
 const name = ref('');
 const level = ref(1);
@@ -31,20 +33,29 @@ const loading = ref(false);
 const error = ref('');
 const success = ref('');
 const router = useRouter();
+const studentSelected = ref<string[]>([]);
 
 const handleSubmit = async () => {
   error.value = '';
   success.value = '';
   loading.value = true;
+  
+
   try {
     const token = localStorage.getItem('token');
     if (!token) {
       error.value = 'Token tidak ditemukan.';
       return;
     }
+    // console.log('Adding grade:', {
+    //   name: name.value,
+    //   level: level.value,
+    //   students: studentSelected.value,
+    // });
     const response = await addGrade(token, {
       name: name.value,
       level: level.value,
+      student_ids: studentSelected.value,
     });
     success.value = response.message;
     name.value = '';

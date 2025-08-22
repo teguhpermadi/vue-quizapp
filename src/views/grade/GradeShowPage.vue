@@ -13,8 +13,8 @@
       <p><strong>Diupdate:</strong> {{ grade.updated_at }}</p>
       <h3>Daftar Siswa</h3>
       <ol>
-        <li v-for="studentGrade in grade.students" :key="studentGrade.id">
-          {{ studentGrade.student ? studentGrade.student.name : '-' }} (NISN: {{ studentGrade.student ? studentGrade.student.nisn : '-' }})
+        <li v-for="student in grade.students" :key="student.id">
+          {{ student.name }}
         </li>
       </ol>
     </div>
@@ -43,6 +43,7 @@ onMounted(async () => {
     }
     const gradeId = route.params.id as string;
     const response = await getGradeDetail(token, gradeId);
+    console.log('Grade detail response:', response);
     grade.value = response.data;
   } catch (err) {
     error.value = 'Gagal memuat data grade.';

@@ -135,6 +135,7 @@ export interface GradesResponse {
 export interface AddGradePayload {
   name: string;
   level: number;
+  student_ids?: string[]; // Optional: array of student IDs to assign to the grade
 }
 
 export interface AddGradeResponse {

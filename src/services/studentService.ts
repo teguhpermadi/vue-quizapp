@@ -190,3 +190,12 @@ export async function deleteStudent(token: string, studentId: string): Promise<D
   });
   return response.data;
 }
+
+export async function getStudentWithoutGrades(token: string): Promise<StudentsResponse> {
+  const response = await axios.get(`${API_BASE_URL}/students/without-grades`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+}
