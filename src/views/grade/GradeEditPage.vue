@@ -11,6 +11,13 @@
         <label>Level:</label>
         <input v-model.number="level" type="number" min="1" required class="form-control"/>
       </div>
+      <div>
+        <StudentSelectEdit
+          v-model="studentSelected"
+          :students-in-grade="grade.students"
+          :key="grade.id"
+        />
+      </div>
       <button type="submit" :disabled="loading" class="btn btn-primary">Simpan Perubahan</button>
     </form>
     <div v-if="loading">Loading...</div>
@@ -24,12 +31,14 @@
 import { ref, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { getGradeDetail, updateGrade } from '../../services/gradeService';
+import StudentSelectEdit from '../../components/grade/StudentSelectEdit.vue';
 
 const route = useRoute();
 const router = useRouter();
 const grade = ref<any>(null);
 const name = ref('');
 const level = ref(1);
+const studentSelected = ref([]);
 const loading = ref(false);
 const error = ref('');
 const success = ref('');
@@ -48,6 +57,15 @@ onMounted(async () => {
     grade.value = response.data;
     name.value = grade.value.name;
     level.value = grade.value.level;
+    studentSelected.value = grade.value.students.map((student: any) => ({
+      id: student.id,
+      name: student.name,
+    }));
+    // tampilkan students dalam array id dan name saja
+    studentSelected.value = grade.value.students.map((student: any) => ({
+      id: student.id,
+      name: student.name,
+    }));
   } catch (err) {
     error.value = 'Gagal memuat data grade.';
   } finally {
@@ -69,6 +87,7 @@ const handleSubmit = async () => {
     const response = await updateGrade(token, gradeId, {
       name: name.value,
       level: level.value,
+      student_ids: studentSelected.value,
     });
     success.value = response.message;
     router.push('/grades'); // redirect

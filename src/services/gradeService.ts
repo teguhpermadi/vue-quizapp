@@ -152,6 +152,7 @@ export interface GradeDetailResponse {
 export interface UpdateGradePayload {
   name: string;
   level: number;
+  student_ids?: string[];
 }
 
 export interface UpdateGradeResponse {

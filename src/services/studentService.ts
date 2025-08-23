@@ -192,7 +192,7 @@ export async function deleteStudent(token: string, studentId: string): Promise<D
 }
 
 export async function getStudentWithoutGrades(token: string): Promise<StudentsResponse> {
-  const response = await axios.get(`${API_BASE_URL}/students/without-grades`, {
+  const response = await axios.get(`${API_BASE_URL}/students/without-grades?per_page=all`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
