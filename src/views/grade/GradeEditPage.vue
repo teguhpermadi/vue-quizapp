@@ -9,14 +9,11 @@
       </div>
       <div>
         <label>Level:</label>
-        <input v-model.number="level" type="number" min="1" required class="form-control"/>
+        <input v-model.number="level" type="number" min="1" max="6" required class="form-control"/>
       </div>
       <div>
-        <StudentSelectEdit
-          v-model="studentSelected"
-          :students-in-grade="grade.students"
-          :key="grade.id"
-        />
+        <h4>Pilih Siswa</h4>
+        <StudentSelectEdit v-model="studentSelected" :current-students="currentStudent"/>
       </div>
       <button type="submit" :disabled="loading" class="btn btn-primary">Simpan Perubahan</button>
     </form>
@@ -39,6 +36,7 @@ const grade = ref<any>(null);
 const name = ref('');
 const level = ref(1);
 const studentSelected = ref([]);
+const currentStudent = ref([]);
 const loading = ref(false);
 const error = ref('');
 const success = ref('');
@@ -57,15 +55,7 @@ onMounted(async () => {
     grade.value = response.data;
     name.value = grade.value.name;
     level.value = grade.value.level;
-    studentSelected.value = grade.value.students.map((student: any) => ({
-      id: student.id,
-      name: student.name,
-    }));
-    // tampilkan students dalam array id dan name saja
-    studentSelected.value = grade.value.students.map((student: any) => ({
-      id: student.id,
-      name: student.name,
-    }));
+    currentStudent.value = grade.value.students
   } catch (err) {
     error.value = 'Gagal memuat data grade.';
   } finally {
@@ -84,11 +74,15 @@ const handleSubmit = async () => {
       return;
     }
     const gradeId = route.params.id as string;
+    
+    console.log('Submitting with students:', studentSelected.value);
+
     const response = await updateGrade(token, gradeId, {
       name: name.value,
       level: level.value,
       student_ids: studentSelected.value,
     });
+
     success.value = response.message;
     router.push('/grades'); // redirect
   } catch (err: any) {
