@@ -91,7 +91,7 @@ export interface Student {
   gender: string;
   nisn: string;
   nis: string;
-  grades: StudentGrade[];
+  grades: Grade[];
   user: StudentUser;
   created_at: string;
   updated_at: string;

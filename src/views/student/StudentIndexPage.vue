@@ -30,7 +30,7 @@
           <td>{{ student.nis }}</td>
           <td>
             <span v-if="student.studentGrades && student.studentGrades.length">
-              {{ student.studentGrades[0].grade.name }}
+              {{ student.studentGrades[0].name }}
             </span>
             <span v-else>-</span>
           </td>
@@ -81,6 +81,7 @@ const loadStudents = async (page = 1, nameFilter = '') => {
     const response = await getStudents(token, urlParams);
     students.value = response.data;
     meta.value = response.meta;
+    // console.log(students.value)
   } catch (err) {
     error.value = 'Gagal memuat data siswa.';
   } finally {
